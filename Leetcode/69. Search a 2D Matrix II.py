@@ -14,3 +14,8 @@ class Solution:
             else:
                 return True
         return answer
+    
+# 풀이2: Pythonic way
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        return any(target in row for row in matrix)
