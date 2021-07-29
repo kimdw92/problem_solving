@@ -1,5 +1,6 @@
 # ProblemSolving
-Notes for 
-Leetcode.com
-Problem-Solving 
-Python 3.6
+My notes for solving problems in 
+- https://leetcode.com/problemset/all/
+- https://programmers.co.kr/learn/challenges
+
+Language: Python 3.6
