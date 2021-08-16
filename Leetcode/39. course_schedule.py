@@ -1,5 +1,5 @@
 # DFS
-# 순환구조찾기 216 ms	33.1 MB 시간복잡도가 너무 구리다
+# 순환구조찾기 
 # My answer
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
@@ -9,25 +9,24 @@ class Solution:
         for x, y in prerequisites:
             graph[x].append(y)
             
-        def dfs(key, path):              
-            # 순환이 아니므로 종료
-            if len(graph[key]) == 0:
+        visited = set()
+        def dfs(key, path):  
+            if key in path:
+                return False
+            if key in visited:
                 return True
             
-            next_keys = graph[key] # next_key는 여러가지 일수 있다
-            for next_key in next_keys:
-                if next_key in path:
-                    return False
-                
-                if not dfs(next_key, path + [next_key]):
+            # next_key는 여러가지 일수 있다
+            for next_key in graph[key]:              
+                if not dfs(next_key, path + [key]):
                     return False
                 # 순환이 아니라고 판단되면 최적화를 위해 뒷단 삭제
-                graph[key].remove(next_key)
             
+            visited.add(key)
             return True
         
         for key in list(graph):
-            if not dfs(key, [key]):
+            if not dfs(key, []):
                 return False
             
         return True
