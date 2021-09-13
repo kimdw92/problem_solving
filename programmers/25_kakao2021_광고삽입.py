@@ -22,26 +22,25 @@ def solution(play_time, adv_time, logs):
         
     logs_2.sort()
     max_count = 0
-    answer = 0
+    answer = [0, at]
     for i in range(len(logs_2)):
         start, end = logs_2[i][0], logs_2[i][1]
         adv_start, adv_end = start, start + at
         count = end - start if end - start < at else at
         for j in range(i+1, len(logs_2)):
-            start, end = logs_2[j][0], logs_2[j][1]
-            if start >= adv_end:
+            _start, _end = logs_2[j][0], logs_2[j][1]
+            if _start >= adv_end:
                 break
-            count += end - start if end <= adv_end else adv_end - start
-            
+            count += _end - _start if _end <= adv_end else adv_end - _start
         if count > max_count:
             max_count = count
             answer = [adv_start, adv_end]
-            print(count, answer)
+            
         
     if answer[1] > pt:
-        adv_start = answer[0] - (answer[1] - pt)
+        answer[0] = answer[0] - (answer[1] - pt)
         
-    m, s = divmod(adv_start, 60)
+    m, s = divmod(answer[0], 60)
     h, m = divmod(m, 60)
-    answer_2 = str(h) + ':' + str(m) + ':' + str(s)
+    answer_2 = str(h).zfill(2) + ':' + str(m).zfill(2) + ':' + str(s).zfill(2)
     return answer_2
